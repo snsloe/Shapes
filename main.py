@@ -16,12 +16,12 @@ class Shapes:
 
     def checking(self):
 
-        for angle in self.angles:
-            if angle is not None and (angle <= 0 or angle >= 360):
+        for i in self.angles:
+            if i is not None and (i <= 0 or i >= 360):
                 raise ValueError("Углы должны быть положительны и меньше 360.")
 
-        for side in self.sides:
-            if side is None or side <= 0:
+        for j in self.sides:
+            if j is None or j <= 0:
                 raise ValueError("Длины сторон должны быть заданы и быть положительными.")
 
         if self.n_angles > 2:
@@ -90,7 +90,7 @@ class Circle(Shapes):
 
     def draw(self):
         fig, ax = plt.subplots()
-        circle = plt.Circle((0, 0), self.sides[0], fill=False, color='blue', linewidth=2)
+        circle = plt.Circle((0, 0), self.sides[0], fill=True, color='blue', linewidth=2)
         ax.add_patch(circle)
         ax.set_xlim(-self.sides[0] - 1, self.sides[0] + 1)
         ax.set_ylim(-self.sides[0] - 1, self.sides[0] + 1)
@@ -282,6 +282,13 @@ except ValueError as e:
 try:
     q_3 = Quadrangle([63, 12, 148, 137], [2, 3, 7, 2.5]) #Пример, стороны и углы могут быть разные
     print(q_3.get_info())
+except ValueError as e:
+    print("Фигура не может быть создана:", e)
+
+try:
+    print("___Проверка фигуры с недастоющими углами___")
+    q_4 = Quadrangle([63, None, None, 137], [2, 3, 7, 2.5]) #Пример, стороны и углы могут быть разные
+    print(q_4.get_info())
 except ValueError as e:
     print("Фигура не может быть создана:", e)
 
